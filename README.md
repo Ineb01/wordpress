@@ -154,6 +154,17 @@ spec:
 
 Modify the `resources` section in deployment files to adjust CPU/memory limits.
 
+### Upload Limits
+
+The WordPress deployment is configured with increased file upload limits:
+
+- **Upload Max File Size**: 500MB
+- **Post Max Size**: 512MB  
+- **Memory Limit**: 512MB
+- **Max Execution Time**: 300 seconds
+
+These settings are configured via a custom PHP configuration file (`manifests/wordpress/php-config.yaml`) that is mounted into the WordPress container at `/usr/local/etc/php/conf.d/uploads.ini`.
+
 ## Troubleshooting
 
 ### Common Issues

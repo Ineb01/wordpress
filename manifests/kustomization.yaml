@@ -12,6 +12,7 @@ resources:
   - mysql/service.yaml
   - wordpress/pvc.yaml
   - wordpress/configmap.yaml
+  - wordpress/php-config.yaml
   - wordpress/deployment.yaml
   - wordpress/service.yaml
   - wordpress/ingress.yaml

@@ -1,0 +1,26 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wordpress-ingress
+  namespace: wordpress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  labels:
+    app: wordpress
+spec:
+  tls:
+  - hosts:
+    - wordpress.cluster.dphx.eu
+    secretName: wordpress-tls
+  rules:
+  - host: wordpress.cluster.dphx.eu
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: wordpress-service
+            port:
+              number: 80

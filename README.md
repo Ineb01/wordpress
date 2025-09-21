@@ -7,7 +7,7 @@ This repository contains a complete ArgoCD deployment configuration for WordPres
 The deployment consists of:
 
 - **WordPress**: Latest WordPress 6.4 with Apache (configured for multisite subdomain mode)
-- **MySQL**: MySQL 8.0 database backend
+- **MySQL**: MySQL 8.0 database backend with automatic multisite table initialization
 - **Persistent Storage**: Separate PVCs for WordPress and MySQL data
 - **ConfigMaps & Secrets**: Secure configuration management
 - **Ingress**: Multiple subdomain support for multisite network
@@ -25,6 +25,7 @@ This WordPress deployment is configured as a **multisite network in subdomain mo
 - **Shared Resources**: All sites share the same WordPress codebase and database
 - **Centralized Management**: Manage all sites from the network admin dashboard
 - **Wildcard SSL**: Supports `*.dphx.eu` wildcard certificate via Let's Encrypt
+- **Auto Database Setup**: MySQL initialization script automatically creates required multisite tables
 
 ## Repository Structure
 
@@ -212,6 +213,7 @@ The configuration is mounted to `/etc/apache2/sites-available/000-default.conf` 
 2. **Database Connection Issues**: Verify MySQL pod is running and credentials match
 3. **External Access Issues**: Check LoadBalancer configuration and firewall rules
 4. **Apache ServerName Warning**: The deployment includes a custom Apache configuration to suppress the `AH00558` warning about determining the server's FQDN
+5. **Multisite Database Tables Missing**: If you see errors like "Table 'wordpress.wp_blogs' doesn't exist", this means the multisite tables are missing. This deployment includes an automatic MySQL initialization script that creates the required multisite tables (`wp_blogs`, `wp_site`, `wp_sitemeta`) with entries for all configured domains. If the error persists, verify that the MySQL pod has restarted after deploying the initialization script.
 
 ### Useful Commands
 
@@ -226,6 +228,13 @@ kubectl get events -n wordpress --sort-by='.lastTimestamp'
 # Describe resources
 kubectl describe deployment wordpress -n wordpress
 kubectl describe deployment mysql -n wordpress
+
+# Force MySQL pod restart to run initialization script (if needed)
+kubectl rollout restart deployment/mysql -n wordpress
+kubectl rollout status deployment/mysql -n wordpress
+
+# Check if multisite tables were created
+kubectl exec -n wordpress deployment/mysql -- mysql -u wordpress -p'wordpresspass' wordpress -e "SHOW TABLES LIKE 'wp_%';"
 ```
 
 ## Security Considerations

@@ -62,7 +62,7 @@ mariadb:
   enabled: true
   architecture: standalone
   auth:
-    rootPassword: ""
+    rootPassword: admin
     database: bitnami_wordpress
     username: bn_wordpress
-    password: ""
+    password: admin

@@ -658,13 +658,7 @@ ingress:
   ##   - Rely on cert-manager to create it by setting the corresponding annotations
   ##   - Rely on Helm to create self-signed certificates by setting `ingress.selfSigned=true`
   ##
-  tls:
-  - hosts:
-      - bella-margherita.dphx.eu
-      - gentlmens-cut.dphx.eu
-      - wordpress.cluster.dphx.eu
-      - wp.cluster.dphx.eu
-    secretName: wordpress-multisite-tls
+  tls: true
   ## @param ingress.tlsWwwPrefix Adds www subdomain to default cert
   ## Creates tls host with ingress.hostname: {{ print "www.%s" .Values.ingress.hostname }}
   ## Is enabled if "nginx.ingress.kubernetes.io/from-to-www-redirect" is "true"

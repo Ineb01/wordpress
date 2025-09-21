@@ -659,7 +659,7 @@ ingress:
   ##   - Rely on Helm to create self-signed certificates by setting `ingress.selfSigned=true`
   ##
   tls:
-    - hosts:
+  - hosts:
       - bella-margherita.dphx.eu
       - gentlmens-cut.dphx.eu
       - wordpress.cluster.dphx.eu
@@ -679,9 +679,9 @@ ingress:
   ##     path: /
   ##
   extraHosts: 
-    - wp.cluster.dphx.eu
-    - bella-margherita.dphx.eu
-    - gentlmens-cut.dphx.eu
+  - wp.cluster.dphx.eu
+  - bella-margherita.dphx.eu
+  - gentlmens-cut.dphx.eu
   ## @param ingress.extraPaths An array with additional arbitrary paths that may need to be added to the ingress under the main host
   ## e.g:
   ## extraPaths:

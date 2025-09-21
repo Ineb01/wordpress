@@ -40,7 +40,14 @@ ingress:
   hostname: wordpress.cluster.dphx.eu
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
-  tls: true
+  tls: false
+  extraTls:
+    - hosts:
+       - gentlmens-cut.dphx.eu
+       - wp.cluster.dphx.eu
+       - bella-margherita.dphx.eu
+       - wordpress.cluster.dphx.eu
+      secretName: wordpress-tls
   extraHosts: 
     - name: wp.cluster.dphx.eu
     - name: bella-margherita.dphx.eu

@@ -1,16 +1,25 @@
-# WordPress ArgoCD Deployment
+# WordPress Multisite ArgoCD Deployment
 
-This repository contains a complete ArgoCD deployment configuration for WordPress with MySQL backend, including all necessary Kubernetes manifests and ArgoCD Application definitions.
+This repository contains a complete ArgoCD deployment configuration for WordPress Multisite with MySQL backend, including all necessary Kubernetes manifests and ArgoCD Application definitions.
 
 ## Architecture
 
 The deployment consists of:
 
-- **WordPress**: Latest WordPress 6.4 with Apache
+- **WordPress Multisite**: Latest WordPress 6.4 with Apache configured for multisite network
 - **MySQL**: MySQL 8.0 database backend
 - **Persistent Storage**: Separate PVCs for WordPress and MySQL data
 - **ConfigMaps & Secrets**: Secure configuration management
-- **LoadBalancer Service**: External access to WordPress
+- **Ingress Controller**: External access via multiple domains with TLS termination
+
+## Multisite Configuration
+
+This deployment is configured as a WordPress multisite network with the following domains:
+
+- **Primary Site**: `bella-margherita.dphx.eu` (Pizzeria)
+- **Secondary Site**: `gentlmens-cut.dphx.eu` (Barber Shop)
+
+Both sites are managed through a single WordPress installation with subdirectory-based multisite configuration.
 
 ## Repository Structure
 
@@ -97,19 +106,12 @@ The MySQL credentials are stored in `manifests/mysql/secret.yaml` with base64 en
 
 ## Accessing WordPress
 
-Once deployed, WordPress will be available via the LoadBalancer service:
+Once deployed, WordPress multisite will be available via the ingress controller at:
 
-```bash
-# Get the external IP
-kubectl get service wordpress-service -n wordpress
+- **Pizzeria Site**: `https://bella-margherita.dphx.eu`
+- **Barber Shop Site**: `https://gentlmens-cut.dphx.eu`
 
-# If using port-forward for testing
-kubectl port-forward service/wordpress-service 8080:80 -n wordpress
-```
-
-Access WordPress at:
-- LoadBalancer: `http://<EXTERNAL-IP>`
-- Port-forward: `http://localhost:8080`
+Both domains are secured with automatic TLS certificates via cert-manager and Let's Encrypt.
 
 ## Monitoring Deployment
 
@@ -164,6 +166,23 @@ The WordPress deployment is configured with increased file upload limits:
 - **Max Execution Time**: 300 seconds
 
 These settings are configured via a custom PHP configuration file (`manifests/wordpress/php-config.yaml`) that is mounted into the WordPress container at `/usr/local/etc/php/conf.d/uploads.ini`.
+
+### Multisite Network Setup
+
+After the initial deployment, you'll need to complete the multisite network setup through the WordPress admin interface:
+
+1. Access the primary site at `https://bella-margherita.dphx.eu/wp-admin`
+2. Complete the initial WordPress setup
+3. Go to **Tools > Network Setup** to configure the multisite network
+4. Add the secondary site for the barber shop:
+   - Navigate to **My Sites > Network Admin > Sites**
+   - Click **Add New** and enter `gentlmens-cut.dphx.eu` as the site address
+   - Configure the site title and admin email
+
+The multisite configuration is pre-configured in the deployment with:
+- Network type: Subdirectory (not subdomain)
+- Primary domain: `bella-margherita.dphx.eu`
+- Network allows both domains to work correctly
 
 ## Troubleshooting
 

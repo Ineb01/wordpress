@@ -42,9 +42,9 @@ ingress:
     cert-manager.io/cluster-issuer: letsencrypt-prod
   tls: true
   extraHosts: 
-    - wp.cluster.dphx.eu
-    - bella-margherita.dphx.eu
-    - gentlmens-cut.dphx.eu
+    - name: wp.cluster.dphx.eu
+    - name: bella-margherita.dphx.eu
+    - name: gentlmens-cut.dphx.eu
 metrics:
   enabled: false
   image:

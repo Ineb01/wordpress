@@ -10,17 +10,29 @@ metadata:
     app: wordpress
 spec:
   tls:
-  - hosts:
-    - wordpress.cluster.dphx.eu
-    secretName: wordpress-tls
+    - hosts:
+        - "*.dphx.eu"
+        - bella-margherita.dphx.eu
+        - gentlmens-cut.dphx.eu
+      secretName: wordpress-multisite-tls
   rules:
-  - host: wordpress.cluster.dphx.eu
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: wordpress-service
-            port:
-              number: 80
+    - host: bella-margherita.dphx.eu
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wordpress-service
+                port:
+                  number: 80
+    - host: gentlmens-cut.dphx.eu
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wordpress-service
+                port:
+                  number: 80

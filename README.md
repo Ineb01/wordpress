@@ -6,11 +6,25 @@ This repository contains a complete ArgoCD deployment configuration for WordPres
 
 The deployment consists of:
 
-- **WordPress**: Latest WordPress 6.4 with Apache
+- **WordPress**: Latest WordPress 6.4 with Apache (configured for multisite subdomain mode)
 - **MySQL**: MySQL 8.0 database backend
 - **Persistent Storage**: Separate PVCs for WordPress and MySQL data
 - **ConfigMaps & Secrets**: Secure configuration management
-- **LoadBalancer Service**: External access to WordPress
+- **Ingress**: Multiple subdomain support for multisite network
+
+## Multisite Configuration
+
+This WordPress deployment is configured as a **multisite network in subdomain mode** with the following domains:
+
+- **bella-margherita.dphx.eu** - Pizzeria site
+- **gentlmens-cut.dphx.eu** - Barber shop site
+
+### Multisite Features
+
+- **Subdomain Install**: Each site gets its own subdomain
+- **Shared Resources**: All sites share the same WordPress codebase and database
+- **Centralized Management**: Manage all sites from the network admin dashboard
+- **Wildcard SSL**: Supports `*.dphx.eu` wildcard certificate via Let's Encrypt
 
 ## Repository Structure
 
@@ -97,13 +111,28 @@ The MySQL credentials are stored in `manifests/mysql/secret.yaml` with base64 en
 
 ## Accessing WordPress
 
-Once deployed, WordPress will be available via the LoadBalancer service:
+Once deployed, the WordPress multisite network will be available at:
 
-```bash
-# Get the external IP
-kubectl get service wordpress-service -n wordpress
+- **Bella Margherita Pizzeria**: https://bella-margherita.dphx.eu
+- **Gentlemen's Cut Barber Shop**: https://gentlmens-cut.dphx.eu
 
-# If using port-forward for testing
+### Initial Setup
+
+1. Visit one of the domains to complete the WordPress installation
+2. After initial setup, access the **Network Admin** at `/wp-admin/network/`
+3. From Network Admin, you can:
+   - Add new sites to the network
+   - Manage existing sites
+   - Install themes and plugins network-wide
+   - Configure network settings
+
+### Adding More Sites
+
+To add additional subdomains to the multisite network:
+
+1. Update the ingress configuration in `manifests/wordpress/ingress.yaml`
+2. Add the new subdomain to the `hosts` list under `tls` and create a new rule
+3. Apply the changes: `kubectl apply -k manifests/`
 kubectl port-forward service/wordpress-service 8080:80 -n wordpress
 ```
 

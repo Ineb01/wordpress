@@ -29,17 +29,17 @@ spec:
             - name: WORDPRESS_DB_NAME
               valueFrom:
                 secretKeyRef:
-                  name: mysql-secret
+                  name: wordpress/mysql-secret
                   key: mysql-database
             - name: WORDPRESS_DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: mysql-secret
+                  name: wordpress/mysql-secret
                   key: mysql-user
             - name: WORDPRESS_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mysql-secret
+                  name: wordpress/mysql-secret
                   key: mysql-password
             - name: WORDPRESS_CONFIG_EXTRA
               value: |

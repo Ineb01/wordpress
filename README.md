@@ -16,6 +16,7 @@ The deployment consists of:
 
 This WordPress deployment is configured as a **multisite network in subdomain mode** with the following domains:
 
+- **wordpress.cluster.dphx.eu** - Main network admin site
 - **bella-margherita.dphx.eu** - Pizzeria site
 - **gentlmens-cut.dphx.eu** - Barber shop site
 
@@ -24,7 +25,7 @@ This WordPress deployment is configured as a **multisite network in subdomain mo
 - **Subdomain Install**: Each site gets its own subdomain
 - **Shared Resources**: All sites share the same WordPress codebase and database
 - **Centralized Management**: Manage all sites from the network admin dashboard
-- **Wildcard SSL**: Supports `*.dphx.eu` wildcard certificate via Let's Encrypt
+- **Wildcard SSL**: Supports `*.dphx.eu` and `*.cluster.dphx.eu` wildcard certificates via Let's Encrypt
 
 ## Repository Structure
 
@@ -113,6 +114,7 @@ The MySQL credentials are stored in `manifests/mysql/secret.yaml` with base64 en
 
 Once deployed, the WordPress multisite network will be available at:
 
+- **Main Network Admin**: https://wordpress.cluster.dphx.eu
 - **Bella Margherita Pizzeria**: https://bella-margherita.dphx.eu
 - **Gentlemen's Cut Barber Shop**: https://gentlmens-cut.dphx.eu
 

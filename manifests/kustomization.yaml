@@ -8,6 +8,7 @@ resources:
   - namespace.yaml
   - mysql/secret.yaml
   - mysql/pvc.yaml
+  - mysql/init-script.yaml
   - mysql/deployment.yaml
   - mysql/service.yaml
   - wordpress/pvc.yaml

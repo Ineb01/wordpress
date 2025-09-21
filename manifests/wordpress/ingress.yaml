@@ -14,6 +14,7 @@ spec:
         - bella-margherita.dphx.eu
         - gentlmens-cut.dphx.eu
         - wordpress.cluster.dphx.eu
+        - wpadmin.cluster.dphx.eu
       secretName: wordpress-multisite-tls
   rules:
     - host: bella-margherita.dphx.eu

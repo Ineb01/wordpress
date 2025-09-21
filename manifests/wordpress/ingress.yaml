@@ -13,6 +13,7 @@ spec:
     - hosts:
         - bella-margherita.dphx.eu
         - gentlmens-cut.dphx.eu
+        - wordpress.cluster.dphx.eu
       secretName: wordpress-multisite-tls
   rules:
     - host: bella-margherita.dphx.eu
@@ -26,6 +27,16 @@ spec:
                 port:
                   number: 80
     - host: gentlmens-cut.dphx.eu
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wordpress-service
+                port:
+                  number: 80
+    - host: wordpress.cluster.dphx.eu
       http:
         paths:
           - path: /

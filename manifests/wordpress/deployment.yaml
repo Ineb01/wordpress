@@ -60,6 +60,9 @@ spec:
             - name: php-config
               mountPath: /usr/local/etc/php/conf.d/uploads.ini
               subPath: uploads.ini
+            - name: apache-config
+              mountPath: /etc/apache2/sites-available/000-default.conf
+              subPath: wordpress.conf
           resources:
             requests:
               memory: "512Mi"
@@ -86,3 +89,6 @@ spec:
         - name: php-config
           configMap:
             name: wordpress-php-config
+        - name: apache-config
+          configMap:
+            name: wordpress-apache-config

@@ -1,0 +1,23 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wordpress-apache-config
+  namespace: wordpress
+  labels:
+    app: wordpress
+data:
+  wordpress.conf: |
+    # Apache configuration for WordPress multisite
+    # Set ServerName to suppress the FQDN warning
+    ServerName wordpress.cluster.dphx.eu
+    
+    # Enable necessary modules for WordPress
+    <Directory "/var/www/html">
+        AllowOverride All
+        Require all granted
+    </Directory>
+    
+    # Log configuration
+    ErrorLog /var/log/apache2/error.log
+    CustomLog /var/log/apache2/access.log combined

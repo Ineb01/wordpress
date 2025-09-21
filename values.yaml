@@ -267,7 +267,7 @@ extraEnvVarsSecret: ""
 ##
 multisite:
   enable: true
-  host: ""
+  host: "wordpress.cluster.dphx.eu"
   networkType: subdomain
   enableNipIoRedirect: false
 ## @section WordPress deployment parameters

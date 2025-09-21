@@ -38,9 +38,9 @@ service:
 ingress:
   enabled: true
   hostname: wordpress.cluster.dphx.eu
-#  annotations:
-#    cert-manager.io/cluster-issuer: letsencrypt-prod
-#  tls: true
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  tls: true
 #  extraHosts: 
 #    - wp.cluster.dphx.eu
 #    - bella-margherita.dphx.eu

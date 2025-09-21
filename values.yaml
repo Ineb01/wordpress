@@ -37,7 +37,7 @@ service:
   
 ingress:
   enabled: true
-#  hostname: wordpress.cluster.dphx.eu
+  hostname: wordpress.cluster.dphx.eu
 #  annotations:
 #    cert-manager.io/cluster-issuer: letsencrypt-prod
 #  tls: true

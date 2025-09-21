@@ -114,7 +114,7 @@ image:
 
 ## @param wordpressUsername WordPress username
 ##
-wordpressUsername: user
+wordpressUsername: admin
 ## @param wordpressPassword WordPress user password
 ## Defaults to a random 10-character alphanumeric string if not set
 ##
@@ -126,16 +126,16 @@ wordpressPassword: ""
 existingSecret: ""
 ## @param wordpressEmail WordPress user email
 ##
-wordpressEmail: user@example.com
+wordpressEmail: benjamin.bachmayr@gmail.com
 ## @param wordpressFirstName WordPress user first name
 ##
-wordpressFirstName: FirstName
+wordpressFirstName: Benjamin
 ## @param wordpressLastName WordPress user last name
 ##
-wordpressLastName: LastName
+wordpressLastName: Bachmayr
 ## @param wordpressBlogName Blog name
 ##
-wordpressBlogName: User's Blog!
+wordpressBlogName: Homepage
 ## @param wordpressTablePrefix Prefix to use for WordPress database tables
 ##
 wordpressTablePrefix: wp_
@@ -266,7 +266,7 @@ extraEnvVarsSecret: ""
 ## @param multisite.enableNipIoRedirect Whether to enable IP address redirection to nip.io wildcard DNS. Useful when running on an IP address with subdomain network type.
 ##
 multisite:
-  enable: false
+  enable: true
   host: ""
   networkType: subdomain
   enableNipIoRedirect: false
@@ -558,7 +558,7 @@ lifecycleHooks: {}
 service:
   ## @param service.type WordPress service type
   ##
-  type: LoadBalancer
+  type: ClusterIP
   ## @param service.ports.http WordPress service HTTP port
   ## @param service.ports.https WordPress service HTTPS port
   ##

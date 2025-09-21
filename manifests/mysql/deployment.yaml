@@ -47,8 +47,6 @@ spec:
           volumeMounts:
             - name: mysql-persistent-storage
               mountPath: /var/lib/mysql
-            - name: mysql-init-script
-              mountPath: /docker-entrypoint-initdb.d
           resources:
             requests:
               memory: "512Mi"
@@ -60,6 +58,3 @@ spec:
         - name: mysql-persistent-storage
           persistentVolumeClaim:
             claimName: mysql-pvc
-        - name: mysql-init-script
-          configMap:
-            name: mysql-init-script

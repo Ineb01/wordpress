@@ -194,6 +194,16 @@ The WordPress deployment is configured with increased file upload limits:
 
 These settings are configured via a custom PHP configuration file (`manifests/wordpress/php-config.yaml`) that is mounted into the WordPress container at `/usr/local/etc/php/conf.d/uploads.ini`.
 
+### Apache Configuration
+
+The deployment includes a custom Apache configuration (`manifests/wordpress/apache-config.yaml`) that:
+
+- **Eliminates ServerName Warning**: Sets `ServerName wordpress.cluster.dphx.eu` to suppress the Apache warning `AH00558: Could not reliably determine the server's fully qualified domain name`
+- **WordPress Directory Permissions**: Configures proper `AllowOverride All` settings for WordPress functionality
+- **Logging Configuration**: Sets up standard Apache error and access logging
+
+The configuration is mounted to `/etc/apache2/sites-available/000-default.conf` in the WordPress container.
+
 ## Troubleshooting
 
 ### Common Issues
@@ -201,6 +211,7 @@ These settings are configured via a custom PHP configuration file (`manifests/wo
 1. **Pods in Pending State**: Check PVC status and storage class availability
 2. **Database Connection Issues**: Verify MySQL pod is running and credentials match
 3. **External Access Issues**: Check LoadBalancer configuration and firewall rules
+4. **Apache ServerName Warning**: The deployment includes a custom Apache configuration to suppress the `AH00558` warning about determining the server's FQDN
 
 ### Useful Commands
 

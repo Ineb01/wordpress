@@ -18,7 +18,6 @@ multisite:
   host: "wordpress.cluster.dphx.eu"
   networkType: subdomain
   enableNipIoRedirect: false
-wordpressSkipInstall: true
 wordpressExtraConfigContent: |
   @ini_set('upload_max_filesize', '128M');
   @ini_set('post_max_size', '128M');

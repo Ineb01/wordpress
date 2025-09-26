@@ -66,3 +66,7 @@ mariadb:
     database: bitnami_wordpress
     username: bn_wordpress
     password: admin
+  primary:
+    persistence:
+      enabled: true
+      size: 8Gi

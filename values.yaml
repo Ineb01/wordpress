@@ -37,7 +37,6 @@ ingress:
   hostname: wordpress.cluster.dphx.eu
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/proxy-body-size: "128m"
   tls: false
   extraTls:
     - hosts:

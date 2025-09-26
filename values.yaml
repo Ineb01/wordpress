@@ -1,24 +1,24 @@
-#global:
-#  security:
-#    allowInsecureImages: true
-#image:
-#  repository: bitnamilegacy/wordpress
-#wordpressUsername: admin
-#wordpressPassword: ""
+global:
+  security:
+    allowInsecureImages: true
+image:
+  repository: bitnamilegacy/wordpress
+wordpressUsername: admin
+wordpressPassword: ""
 ## @param existingSecret Name of existing secret containing WordPress credentials
 ## NOTE: Must contain key `wordpress-password`
 ## NOTE: When it's set, the `wordpressPassword` parameter is ignored
 ##
-#wordpressEmail: benjamin.bachmayr@gmail.com
-#wordpressFirstName: Benjamin
-#wordpressLastName: Bachmayr
-#wordpressBlogName: Homepage
-#multisite:
-#  enable: true
-#  host: "wordpress.cluster.dphx.eu"
-#  networkType: subdomain
-#  enableNipIoRedirect: false
-#replicaCount: 1
+wordpressEmail: benjamin.bachmayr@gmail.com
+wordpressFirstName: Benjamin
+wordpressLastName: Bachmayr
+wordpressBlogName: Homepage
+multisite:
+  enable: true
+  host: "wordpress.cluster.dphx.eu"
+  networkType: subdomain
+  enableNipIoRedirect: false
+replicaCount: 1
 service:
   type: ClusterIP
   
@@ -39,21 +39,21 @@ ingress:
     - name: wp.cluster.dphx.eu
     - name: bella-margherita.dphx.eu
     - name: gentlmens-cut.dphx.eu
-#metrics:
-#  enabled: false
-#  image:
-#    repository: bitnamilegacy/apache-exporter
-#mariadb:
-#  image:
-#    repository: bitnamilegacy/mariadb
-#  enabled: true
-#  architecture: standalone
-#  auth:
-#    rootPassword: admin
-#    database: bitnami_wordpress
-#    username: bn_wordpress
-#    password: admin
-#  primary:
-#    persistence:
-#      enabled: true
-#      size: 8Gi
+metrics:
+  enabled: false
+  image:
+    repository: bitnamilegacy/apache-exporter
+mariadb:
+  image:
+    repository: bitnamilegacy/mariadb
+  enabled: true
+  architecture: standalone
+  auth:
+    rootPassword: admin
+    database: bitnami_wordpress
+    username: bn_wordpress
+    password: admin
+  primary:
+    persistence:
+      enabled: true
+      size: 8Gi

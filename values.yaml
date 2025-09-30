@@ -29,6 +29,11 @@ wordpressExtraConfigContent: |
   define('SITECOOKIEPATH', '');
   define('ADMIN_COOKIE_PATH', '/');
   define('COOKIEHASH', md5('wordpress.cluster.dphx.eu'));
+extraEnvVars:
+  - name: PHP_POST_MAX_SIZE
+    value: 128M
+  - name: PHP_UPLOAD_MAX_FILESIZE
+    value: 128M
 replicaCount: 1
 service:
   type: ClusterIP

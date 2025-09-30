@@ -19,11 +19,6 @@ multisite:
   networkType: subdomain
   enableNipIoRedirect: false
 wordpressExtraConfigContent: |
-  @ini_set('upload_max_filesize', '128M');
-  @ini_set('post_max_size', '128M');
-  @ini_set('memory_limit', '256M');
-  @ini_set('max_execution_time', '300');
-  @ini_set('max_input_time', '300');
   define('COOKIE_DOMAIN', '');
   define('COOKIEPATH', '');
   define('SITECOOKIEPATH', '');
@@ -34,6 +29,12 @@ extraEnvVars:
     value: 128M
   - name: PHP_UPLOAD_MAX_FILESIZE
     value: 128M
+  - name: PHP_MEMORY_LIMIT
+    value: 256M
+  - name: PHP_MAX_EXECUTION_TIME
+    value: "300"
+  - name: PHP_MAX_INPUT_TIME
+    value: "300"
 replicaCount: 1
 service:
   type: ClusterIP

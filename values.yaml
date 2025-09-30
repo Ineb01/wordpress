@@ -21,10 +21,6 @@ wordpressExtraConfigContent: |
   define('SITECOOKIEPATH', '');
   define('ADMIN_COOKIE_PATH', '/');
   define('COOKIEHASH', md5('wordpress.cluster.dphx.eu'));
-  
-  // Force upload size limit
-  add_filter('upload_size_limit', function($size) { return 128 * 1024 * 1024; });
-  add_filter('wp_max_upload_size', function($size) { return 128 * 1024 * 1024; });
 extraEnvVars:
   - name: PHP_POST_MAX_SIZE
     value: 128M

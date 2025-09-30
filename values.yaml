@@ -14,10 +14,7 @@ wordpressFirstName: Benjamin
 wordpressLastName: Bachmayr
 wordpressBlogName: Homepage
 multisite:
-  enable: true
-  host: "wordpress.cluster.dphx.eu"
-  networkType: subdomain
-  enableNipIoRedirect: false
+  enable: false
 wordpressExtraConfigContent: |
   define('COOKIE_DOMAIN', '');
   define('COOKIEPATH', '');

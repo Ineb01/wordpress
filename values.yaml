@@ -24,6 +24,14 @@ wordpressExtraConfigContent: |
   define('SITECOOKIEPATH', '');
   define('ADMIN_COOKIE_PATH', '/');
   define('COOKIEHASH', md5('wordpress.cluster.dphx.eu'));
+customPostInitScripts:
+  upload-config.sh: |
+    #!/bin/bash
+    echo "upload_max_filesize = 128M" >> /opt/bitnami/php/etc/php.ini
+    echo "post_max_size = 128M" >> /opt/bitnami/php/etc/php.ini
+    echo "memory_limit = 256M" >> /opt/bitnami/php/etc/php.ini
+    echo "max_execution_time = 300" >> /opt/bitnami/php/etc/php.ini
+    echo "max_input_time = 300" >> /opt/bitnami/php/etc/php.ini
 extraEnvVars:
   - name: PHP_POST_MAX_SIZE
     value: 128M

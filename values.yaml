@@ -24,14 +24,29 @@ wordpressExtraConfigContent: |
   define('SITECOOKIEPATH', '');
   define('ADMIN_COOKIE_PATH', '/');
   define('COOKIEHASH', md5('wordpress.cluster.dphx.eu'));
-customPostInitScripts:
-  upload-config.sh: |
-    #!/bin/bash
-    echo "upload_max_filesize = 128M" >> /opt/bitnami/php/etc/php.ini
-    echo "post_max_size = 128M" >> /opt/bitnami/php/etc/php.ini
-    echo "memory_limit = 256M" >> /opt/bitnami/php/etc/php.ini
-    echo "max_execution_time = 300" >> /opt/bitnami/php/etc/php.ini
-    echo "max_input_time = 300" >> /opt/bitnami/php/etc/php.ini
+initContainers:
+  - name: php-config
+    image: bitnamilegacy/wordpress
+    command: 
+      - /bin/bash
+      - -c
+      - |
+        cp /opt/bitnami/php/etc/php.ini /shared/php.ini
+        echo "upload_max_filesize = 128M" >> /shared/php.ini
+        echo "post_max_size = 128M" >> /shared/php.ini  
+        echo "memory_limit = 256M" >> /shared/php.ini
+        echo "max_execution_time = 300" >> /shared/php.ini
+        echo "max_input_time = 300" >> /shared/php.ini
+    volumeMounts:
+      - name: php-config
+        mountPath: /shared
+extraVolumes:
+  - name: php-config
+    emptyDir: {}
+extraVolumeMounts:
+  - name: php-config
+    mountPath: /opt/bitnami/php/etc/php.ini
+    subPath: php.ini
 extraEnvVars:
   - name: PHP_POST_MAX_SIZE
     value: 128M

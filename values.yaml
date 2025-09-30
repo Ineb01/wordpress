@@ -78,3 +78,9 @@ mariadb:
     persistence:
       enabled: true
       size: 8Gi
+      storageClass: ""
+      accessModes:
+        - ReadWriteOnce
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "local-path"
+      reclaimPolicy: Delete
